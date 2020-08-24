@@ -24,12 +24,14 @@ respons = requests.get(host).json()
 '''
 
 request_url = "https://aip.baidubce.com/rest/2.0/ocr/v1/idcard"
-dir = 'C:/Users/admin/Desktop/fileimage/'
+# dir = 'C:/Users/admin/Desktop/fileimage/fileimg888/'
 # 二进制方式打开图片文件
-aaa = []
-for f in os.listdir("C:\\Users\\admin\\Desktop\\fileimage"):
-	cc = f
-	dd = open(dir+f, 'rb')
+# aaa = []
+path=input("请输入路径(例如D:\\\\picture)：")
+# for f in os.listdir("C:\\Users\\admin\\Desktop\\fileimage\\fileimg888\\"):
+for f in os.listdir(path):
+	gg = path+'\\'+f
+	dd = open(path+'\\'+f, 'rb')
 	img = base64.b64encode(dd.read())
 
 	params = {"id_card_side":"front","image":img}
@@ -90,7 +92,7 @@ for f in os.listdir("C:\\Users\\admin\\Desktop\\fileimage"):
 	    					try:
 	    						with connection.cursor() as cursor:
 	    							sql = "INSERT INTO `user` (`username`, `password`,`addr`) VALUES (%s, %s,%s)"
-	    							cursor.execute(sql, (aa,bb,f))
+	    							cursor.execute(sql, (aa,bb,gg))
 	    						connection.commit()
 	    					finally:
 	    						connection.close()
